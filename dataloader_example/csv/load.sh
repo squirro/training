@@ -6,11 +6,11 @@ TOKEN="...abc..."
 PROJECT_ID="...123..."
 
 squirro_data_load -v \
-    --token $CLUSTER \
-    --cluster $TOKEN \
+    --cluster $CLUSTER \
+    --token $TOKEN \
     --project-id $PROJECT_ID \
     --source-type csv \
-    --source-file 'Data.csv' \
+    --source-file 'companies.csv' \
     --source-name 'CSV File' \
     --map-title 'ticker' \
     --map-body 'company' \
