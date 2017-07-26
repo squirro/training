@@ -21,8 +21,67 @@ The CSV file that we will load as a test has a list of companies with some basic
 
 |id|company|ticker|ipo_date|number_employees|link|
 |---|---|---|---|---|---|
-|1|Apple|AAPL|<span style="font-size: 10px;">1980-12-12T00:00:00</span>|116000|https://finance.yahoo.com/quote/AAPL|
+|1|Apple|AAPL|1980-12-12T00:00:00|116000|https://finance.yahoo.com/quote/AAPL|
 |2|Google|GOOG|2004-08-19T00:00:00|73992|https://finance.yahoo.com/quote/GOOG|
 |3|Microsoft|MSFT|1986-03-13T00:00:00|120849|https://finance.yahoo.com/quote/MSFT|
 |4|Amazon|AMZN|1997-05-15T00:00:00|341400|https://finance.yahoo.com/quote/AMZN|
 |5|Intel|INTC|1978-01-13T00:00:00|106000|https://finance.yahoo.com/quote/INTC|
+
+## Constructing a Load Script
+Because the Squirro Data Loader takes lots of paramters as inputs, we will construct a load script which calls the dataloader with all of the required paramters included.
+
+The example here is shown as a bash script, used on Linux or MacOS. For Windows, Batch scripts are used in place.
+
+An example of a load script written in bash is included in `load.sh`.
+We wil go through this example load script line by line
+
+```bash
+#!/bin/bash
+set -e
+```
+
+asdf
+
+```bash
+CLUSTER="http://...squirro.net/"
+TOKEN="...abc..."
+PROJECT_ID="...123..."
+```
+
+asdf
+
+```bash
+squirro_data_load -v \
+```
+
+asdf
+
+```bash
+    --cluster $CLUSTER \
+    --token $TOKEN \
+    --project-id $PROJECT_ID \
+```
+
+asdf
+
+```bash
+    --source-type csv \
+    --source-file 'companies.csv' \
+    --source-name 'CSV File' \
+```
+
+asdf
+
+```bash
+    --map-title 'ticker' \
+    --map-body 'company' \
+    --map-id 'id' \
+    --map-url 'link' \
+    --map-created-at 'ipo_date' \
+```
+
+asdf
+
+```bash
+    --facets-file 'facets.json'
+```
