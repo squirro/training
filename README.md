@@ -5,7 +5,7 @@ Included here are a set of examples and training resources meant to accompany th
 ## Getting Started
 
 ### Requirements
-To use the examples here, you will need to install the squirro toolbox. The Squirro toolbox is available to all Squirro Partners and Developers [Here](https://squirro.atlassian.net/wiki/display/DOC/Toolbox)
+To use the examples here, you will need to install the squirro toolbox. The Squirro toolbox is available to all Squirro Partners and Developers [Here](https://squirro.atlassian.net/wiki/display/DOC/Toolbox). If you would like access to the Squirro Data Loader, please contact support@squirro.com.
 
 ### Python
 To use the Squirro Toolbox, you must have Python2 intalled. Please note that the Squirro toolbox does not support Python3 (yet).
