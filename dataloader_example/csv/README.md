@@ -21,7 +21,7 @@ The CSV file that we will load as a test has a list of companies with some basic
 
 |id|company|ticker|ipo_date|number_employees|link|
 |---|---|---|---|---|---|
-|1|Apple|AAPL|1980-12-12T00:00:00|116000|https://finance.yahoo.com/quote/AAPL|
+|1|Apple|AAPL|<span style="font-size: 10px;">1980-12-12T00:00:00</span>|116000|https://finance.yahoo.com/quote/AAPL|
 |2|Google|GOOG|2004-08-19T00:00:00|73992|https://finance.yahoo.com/quote/GOOG|
 |3|Microsoft|MSFT|1986-03-13T00:00:00|120849|https://finance.yahoo.com/quote/MSFT|
 |4|Amazon|AMZN|1997-05-15T00:00:00|341400|https://finance.yahoo.com/quote/AMZN|
