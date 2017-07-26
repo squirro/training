@@ -86,6 +86,38 @@ Once the source data is defined, the next step is to map fields in the input dat
 ```bash
     --facets-file 'facets.json'
 ```
-The last line of the load script tells the data loader where it can find the definition for the Facets to include in this data source. Facets are often used so that additional information (not used for the title, body, etc.) can be included within each item sent to Squirro. An example `facets.json` file is shown here.
+The last line of the load script tells the data loader where it can find the definition for the Facets to include in this data source. Facets are often used so that additional information (not used for the title, body, etc.) can be included within each item sent to Squirro. An example `facets.json` file is included here. In general, facet definitions have this form:
+```hjson
+{
+    # The name of the column in the input data
+    "ticker": {
+
+        # The data type of the data stored in this facet (can also be int, float, or datetime)
+        "data_type": "string",
+
+        # The name of the facet that the values will be stored in
+        "name": "ticker_symbol",
+
+        # A display name to be used in the Squirro UI
+        "display_name": "Ticker Symbol",
+
+        # The name of a facet group that this facet is included in
+        "group_name": "Companies",
+
+        # Whether or not this facet is visible to an end user
+        "visible": true,
+
+        # Whether or not the values in this facet are indexed for full-text search
+        "searchable": true,
+
+        # Whether or not the values in this facet are available for typeahead completion
+        "typeahead": true,
+
+        # Whether or not the values in this facet are analyzed
+        "analyzed": true,
+    }
+}
+```
+For more information on facet configuration, check the [Data Loader Facet Config Reference](https://squirro.atlassian.net/wiki/display/DOC/Data+Loader+Facet+Config+Reference)
 ### Using this Example
 To use this example, you will only need to modify the values given to the environment variables on lines 4, 5, and 6. For details on how to find your cluster, token, or project_id, check the documentation page [Connecting to Squirro](https://squirro.atlassian.net/wiki/display/DOC/Connecting+to+Squirro)
