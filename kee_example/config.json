@@ -1,0 +1,133 @@
+{
+
+    "kee": {
+        "pipelet": "Company KEE",
+        "version": "1.0.0",
+        "version_keyword": "company_kee_version"
+    },
+
+    "squirro": {
+        "cluster": "",
+        "token": "",
+        "project_id": ""
+    },
+
+    "sources": {
+        "company": {
+            "source_type": "csv",
+            "source_file": "companies.csv",
+            "field_id": "id",
+            "field_matching": [
+                "company",
+                "ticker"
+            ],
+            "strategy": "company"
+        }
+    },
+
+    "strategies": {
+        "company": {
+            "min_score": 0.8,
+            "ngram": "company",
+            "clean_keywords": [
+                "company",
+                "company_kee_version"
+            ],
+            "keywords": [
+                "company -> company_name",
+                "ticker -> company_ticker",
+            ],
+            "blacklist": [
+            ]
+        }
+    },
+
+    "suffix_list": {
+        "company": {
+            # Universally used tokens.
+            "GLOBAL": ["LTD.", "LIMITED", "INC.", "GMBH.", "CO.", "AG.",
+                "Competitor", "Worldwide", "International"],
+
+            # Industry stuff
+            "INDUSTRY": ["Investment", "Funds", "Bank", "Asset Management", "Private Banking"],
+            "DEU": ["NL", "e.G.", "e.V.", "GbR", "OHG", "KG", "GmbH & Co. KG", "GmbH & Co.KG", "GmbH & Co. KGaA",
+                "AG & Co. KG", "AG & Co. KGaA", "PartG", "KGaA", "GmbH", "AG", "I.I.", "I.L.", "aktiengesellschaft",
+                "MBH", "GMBHCO"],
+            "CZE": ["a.s.", "akc.", "spol.", "s.r.o.", "s. r. o.", "spol. s r.o.", "spol.s r.o", "spol.s.ro.", "spol.s.r.o.", "v.o.s.", "k.s.", "s.p.", "v.d.", "v.v.i.", "s.s r.oo"],
+            "ESP": ["S.A.", "S. A.", "SA", "S.A.D.", "S.L.", "S. L.", "SL", "S.L.U.", "S.L.L.", "S.L.N.E.", "S.C.", "S.Cra.",
+                "S.Coop.", "S Coop", "S.A.U.", "SAU", "SAL", "SLU", "S.A.L.", "S.A.U.", "SOCIEDAD LIMITADA", "SCCL",
+                "SOCIEDAD COOPERATIVA LIMITADA", "Sociedad Anónima", "Sociedad Anónima Deportiva",
+                "Sociedad Limitada", "Sociedad Limitada Laboral", "Sociedad Limitada Nueva Empresa",
+                "Sociedad Colectiva", "Sociedad Comanditaria", "Sociedad Cooperativa",
+                "Sociedad Anónima Laboral", "Sociedad Cooperativa Catalana Limitada",
+                "SOCIEDAD LIMITADA", "SOCIEDAD ANONIMA"],
+            "BRA": ["Ltda.", "S.A.", "S/A", "SA", "PLLC", "ind.e", "DO BRASIL"],
+            "MEX": ["S.A.", "S. de R.L.", "S. en C.", "S. en C. por A.", "S.A.B.", "S.A.P.I.", "SA DE CV",
+                "S.A. DE C.V.", "S. DE R.L. DE C.V.", "S. A DE C. V.", "S.A.DE C.V.", "S DE RL DE CV",
+                "S.A.D E C.V.", "S.DE R.L. DE C.V.", "S.C.", "S. EN N.C. DE C.V."],
+            "FRA": ["EI", "EURL", "SASU", "FCP", "SICAV", "GIE", "SEP", "SNC", "SCS", "SCA", "SARL", "SàRL", "SA", "SCOP", "SEM", "SAS",
+                "S.A.", "S.A.S.", ""],
+            "GBR": ["CIC", "CIO", "LLP", "LP", "Ltd.", "Cyf", "plc", "Ccc", "LIMITED", "CO LTD", "L P"],
+            "USA": ["NA", "NT&SA", "NCUA", "LP", "LLP", "LLLP", "LLC", "PLLC", "Corp.", "Inc.", "Co.", "Company", "S.p.A.",
+                "and Company", "and Co.", "& Company", "& Co.", "PC", "DBA", "L.L.C.", "L.L.P.", "L.P.", "CORPORATION",
+                "LTD", "INCORPORATED", "LIMITED", "LIMITED PARTNERSHIP", "GENERAL PARTNERSHIP"],
+            "CHN": ["CO. LTD.", "CO.LTD."],
+            "POL": ["P.P.", "S.A.", "s.c.", "S.K.A.", "sp.j.", "sp.k.", "sp.p.", "Sp.", "o.o.", "SP. Z O.O.", "SP.Z O.O.",
+                "sp.zo.o", "z.o.o", "sp.zoo", "zo.o", "sp.z.o.o", "s.z.o.o", "SP Z O O", "S.A.", "SA", "S A", "SP K.",
+                "firma"],
+            "AUT": ["Gen", "Privatstiftung", "Verein", "e.U.", "AG", "Gmbh", "stG", "GesbR", "OG", "GmbH & Co. KG", "OEG", "KEG",
+                "GES.M.B.H.", "GESMBH", "GESELLSCHAFT M.B.H. & CO. KG", "MBH", "GM", "OHG", "co.kg",
+                "AKTIENGESELLSCHAFT"],
+            "IND": ["Pvt.", "Ltd.", "Ltd.", "PSU", "PSE", "PVT.LTD."],
+            "ARG": ["S.A.", "S.R.L.", "S.C.S.", "S.C.p.A", "Soc.Col.", "S.C.e.I.", "S.E.", "S.G.R", "SRL", "S.A.I.C.",
+                "S.A.C.I.F. E I.", "S.A.I.C.A.", "S.A.I.C.I.A.F.", "S.A.I.C.I.", "S.A.I.C.F.I.",
+                "S.A.I.C.I.F.A.YC.", "SA", "S.A.C.I.F.I.A.", "S.A.I.C. Y F.", "S.A.C.I.", "S.A.I. Y C.",
+                "S. A.", "S.A.I.C.F", "LIMITADA", "S.A.C.I.E.A.I", "S.A.C.I.F.I"],
+            "SVK": ["a.s.", "s.r.o", "spol.", "s r.o.", "k.s.", "v.o.s.", "S. R. O.", "A. S.", "SRO", "SPOL.S.R.O.", ""],
+            "ZAF": ["CC", "BK", "(Pty) Ltd", "PLLC", "LTD", "SA", "S. A.", "LIMITED"],
+            "BEL": ["ESV", "GIE", "VZW", "ASBL", "VoG", "SEP", "VOF", "SNC", "Comm.V", "SCS", "Comm.VA", "SCA", "BVBA", "SPRL", "EBVBA",
+                "SPRLU", "VN", "SA", "CVBA", "SCRL", "CVOA", "SCRI", "S.A.", "N.V", "NV", "SA", "N. V.", "LTD CO"],
+            "HUN": ["e.v.", "e.c.", "bt.", "kft.", "kht.", "kkt.", "kb.", "rt.", "zrt.", "nyrt.", "LTD.", "K.F.T.", ""],
+            "CHE": ["SICAF", "SICAF", "SICAV", "SICAV", "wIG", "GIE", "RI", "eG", "KolG", "SNC", "KG", "SC", "KomAG", "SCA", "GmbH",
+                "Sàrl", "AG", "SA", "Scoop", "ET CIE S.A.", "SARL", "S.A.", "CO."],
+            "NLD": ["W.A.", "B.A.", "U.A.", "Mts", "V.O.F.", "C.V.", "B.V.", "N.V.", "BV"],
+            "PRT": ["CRL", "S.A.", "S.F.", "Lda.", "SGPS", "SA", "LD", "LIMITADA", "LTD.", "S. A."],
+            "TUR": ["A.Ş.", "Ltd. Şti.", "Kom. Şti", "Koll. Şti.", "Şb.", "A.S.", "A S", "AS", "LTD. STI.", "LTD.STI.",
+                "SAN.VE", "SAN. VE", "LIMITED"],
+            "ROU": ["S.A.", "S.C.A.", "S.C.S.", "S.N.C", "S.R.L.", "O.N.G.", "S. R. L.", "SCS", "SRL", "SA"],
+            "RUS": ["LLC", "OOO", "LTD", "LTDA", "VSR", "OAO", "ZAO", "State corporation"],
+            "JPN": ["K.K.", "Y.K.", "G.K.", "GSK", "GMK", "NK", "TK", "CO. LTD.", "INC.", "CORPORATION", "LIMITED"],
+            "SWE": ["AB", "AB publ", "Ek. för.", "HB", "KB"],
+            "SVN": ["d.d.", "d.o.o.", "d.n.o.", "k.d.", "s.p.", "D O O", "D.O", "P O"],
+            "KOR": ["CO. LTD.", "CORP.", "INC."],
+            "CAN": ["AULC", "NSULC", "Ltd.", "Ltée", "Inc.", "Corp.", "S.A.R.F.", "S.C.C.", "LIMITED", "CORPORATION",
+                "CO. INC."],
+            "DNK": ["I/S", "ApS", "A/S", "K/S", "P/S", "A.M.B.A.", "F.M.B.A.", "S.M.B.A.", "G/S", "A.S."],
+            "MYS": ["Bhd.", "Sdn. Bhd.", "SDN.BHD"],
+            "LUX": ["S.A.", "S.A.R.L.", "SECS", "SA", "S.À R.L."],
+            "NO": ["ASA", "AS", "ANS", "BA", "BL", "DA", "Etat", "FKF", "HF", "IKS", "KF", "KS", "NUF", "RHF", "SF"],
+            "UKR": ["LIMITED LIABILITY COMPANY", "JOINT STOCK COMPANY", "DAT", "ДАТ", "FOP", "ФОП", "KT", "PT", "ПT",
+                "TDV", "ТДВ", "TOV", "TOB", "PP", "ПП", "VAT", "ВАТ", "ZAT", "ЗАТ", "AТ"],
+            "BIH": ["d.d.", "a.d.", "d.n.o.", "d.o.o.", "k.d.", "s.p.", "dd."],
+            "BGR": ["AD", "АД", "ADSITz", "АДСИЦ", "EAD", "ЕАД", "EOOD", "ЕООД", "ET", "OOD", "ООД", "KD", "КД", "KDA", "КДА", "SD"],
+            "FIN": ["Ay", "Ky", "Oy", "Oyj", "Ok", "T:mi", "AB"],
+            "HRV": ["d.d.", "d.o.o.", "obrt."],
+            "AUS": ["Inc.", "Incorporated", "Ltd.", "Limited", "NL", "Pty. Ltd.", "Proprietary Limited", "Pty.", "Unlimited Proprietary"],
+            "SRB": ["a.d.", "a.д.", "d.o.o.", "д.о.о.", "k.d.", "к.д.", "o.d.", "о.д."],
+            "SGP": ["LLP", "Ltd", "Bhd", "Pte Ltd", "Sdn Bhd", "Ltd", "Bhd"],
+            "LVA": ["SIA", "AS", "IK", "PS", "KS"],
+            "EST": ["FIE", "UU", "TU", "OU", "AS"],
+            "LTU": ["UAB", "AB", "VšĮ", "IĮ", "TŪB", "KŪB", "MB"],
+            "ITA": ["SGR", "S.p.A."],
+        },
+    },
+
+    "ngram": {
+        "company": {
+            "source": "ngram/",
+            "common": [
+            ]
+        }
+    }
+
+}
