@@ -40,7 +40,8 @@ We wil go through this example load script line by line
 set -e
 ```
 
-asdf
+The very first line of this script tells us that it is a bash script, and instructs the computer on how to execute it.
+The second line `set -e` tells bash that the execution fo the script should stop if the script encounters an error. By default, bash scripts will continue running even after the script encounters an error.
 
 ```bash
 CLUSTER="http://...squirro.net/"
@@ -48,13 +49,13 @@ TOKEN="...abc..."
 PROJECT_ID="...123..."
 ```
 
-asdf
+Next, we add our cluster URL, user refresh token, and target project ID into environment variables which can be accessed by the script later.
 
 ```bash
 squirro_data_load -v \
 ```
 
-asdf
+Once we Have all of the info that we need, the Data Loader is called. The extra option `-v` tells the Data Loader to run in verbose mode, so that we get more output that describes what the Data Loader is doing
 
 ```bash
     --cluster $CLUSTER \
@@ -62,7 +63,7 @@ asdf
     --project-id $PROJECT_ID \
 ```
 
-asdf
+When we call the Data Loader, we pass in the values for cluster, token, and project_id that we defined above.
 
 ```bash
     --source-type csv \
@@ -70,7 +71,7 @@ asdf
     --source-name 'CSV File' \
 ```
 
-asdf
+The source arguments tell the Data Loader what kind of data we are loading and where the original document can be found. Additionally, `--source-name` tells the Data Loader what the name of the source that shows up in the user interface for this data should be.
 
 ```bash
     --map-title 'ticker' \
@@ -80,8 +81,11 @@ asdf
     --map-created-at 'ipo_date' \
 ```
 
-asdf
+Once the source data is defined, the next step is to map fields in the input data to the main fields within the squirro items created. This tells the data loader which column should be used for the body, title, id, url, and created_at date for each item that the data loader sends to squirro. The fields listed in single quotes on the right are the columns of the CSV file that are being used for each field of the squirro item.
 
 ```bash
     --facets-file 'facets.json'
 ```
+The last line of the load script tells the data loader where it can find the definition for the Facets to include in this data source. Facets are often used so that additional information (not used for the title, body, etc.) can be included within each item sent to Squirro. An example `facets.json` file is shown here.
+### Using this Example
+To use this example, you will only need to modify the values given to the environment variables on lines 4, 5, and 6. For details on how to find your cluster, token, or project_id, check the documentation page [Connecting to Squirro](https://squirro.atlassian.net/wiki/display/DOC/Connecting+to+Squirro)
