@@ -3,7 +3,7 @@ Each folder is a separate example for how the Squirro Data Loader tool can be us
 It is recommended to go in order, starting with the CSV example. Each example will build on the previous example and add a new feature.
 
 ## Getting the data loader
-The Squirro Data Loader is distributed as part of the Squirro Toolbox. To install the Squirro Toolbox, follow the instructions [Here](../)
+The Squirro Data Loader is distributed as part of the Squirro Toolbox. To install the Squirro Toolbox, follow the instructions [Here](..)
 
 ## Examples
 
