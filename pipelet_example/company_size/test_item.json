@@ -1,0 +1,10 @@
+{
+    "id": "1",
+    "title": "AAPL",
+    "body": "Apple",
+    "link": "https://finance.yahoo.com/quote/AAPL",
+    "created_at": "1980-12-12T00:00:00",
+    "keywords": {
+        "number_employees": ["116000"]
+    }
+}
