@@ -17,13 +17,13 @@ class CompanySizePipelet(PipeletV1):
         number_of_employees = item['keywords']['number_employees'][0]
         number_of_employees = int(number_of_employees)
 
-        if number_of_employees > 250000:
+        if number_of_employees >= 250000:
             company_size = 'Huge'
 
-        elif number_of_employees > 100000:
+        elif number_of_employees >= 100000:
             company_size = 'Large'
 
-        elif number_of_employees > 50000:
+        elif number_of_employees >= 50000:
             company_size = 'Medium'
 
         else:

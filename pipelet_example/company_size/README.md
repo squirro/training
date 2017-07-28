@@ -14,9 +14,9 @@ The data set looks like this:
 
 Our goal with this pipelet is to classify each company as either a small, medium, large, or huge company based on it's number of employees.
 Specifically:
-* Small = 0 - 50,000
-* Medium = 50,000 - 100,000
-* Large = 100,000 - 250,000
+* Small = 0 - 49,999
+* Medium = 50,000 - 99,999
+* Large = 100,000 - 249,999
 * Huge = 250,000+
 
 ## Walking through the pipelet code
@@ -61,13 +61,13 @@ The first step for this pipelet is to fetch the number of employees at the compa
 Because the number of employees is stored as the only value within the facet named `number_employees`, we can grab the number of employees for a given company and convert it to an integer using the code shown above.
 
 ```python
-        if number_of_employees > 250000:
+        if number_of_employees >= 250000:
             company_size = 'Huge'
 
-        elif number_of_employees > 100000:
+        elif number_of_employees >= 100000:
             company_size = 'Large'
 
-        elif number_of_employees > 50000:
+        elif number_of_employees >= 50000:
             company_size = 'Medium'
 
         else:
