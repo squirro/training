@@ -84,3 +84,49 @@ Once we have the number of employees stored as an integer, the next step is to d
 ```
 
 Once we have the company size figured out, we can include the company size information in a new facet. In this example, we are putting the value in a facet called `company_size`. It's important to note that we don't assign the value directly as the facet value, but assign it within a list.
+
+## Testing the Pipelet
+To test this pielet, we will have the pipelet consume the test item stored in `test_item.json`, and print the result. Our test item is a JSON object in the squirro item format that has all of the needed data for Apple. It looks like this:
+```json
+{
+    "id": "1",
+    "title": "AAPL",
+    "body": "Apple",
+    "link": "https://finance.yahoo.com/quote/AAPL",
+    "created_at": "1980-12-12T00:00:00",
+    "keywords": {
+        "number_employees": ["116000"]
+    }
+}
+```
+The Squirro toolbox includes a tool for testing pipelets on test items before deploying them to projects. This tool is the pipelet component of the `squirro_asset` tool.
+
+To use the `squirro_asset` tool to test the pipelet with this test item, you can call it by specifying the location of the pipelet and the location of the test item. For example:
+```bash
+$ squirro_asset pipelet consume "company_size.py" -i "test_item.json"
+```
+
+To test the pipelet, you can run the above command yourself, or run the script `test.sh`. You should get output that looks like this:
+```bash
+$ ./consume.sh
+Loading items...
+Loading test_item.json ...
+Loaded.
+yielded item
+{u'body': u'Apple',
+ u'created_at': u'1980-12-12T00:00:00',
+ u'id': u'1',
+ u'keywords': {'company_size': ['Large'], u'number_employees': [u'116000']},
+ u'link': u'https://finance.yahoo.com/quote/AAPL',
+ u'title': u'AAPL'}
+```
+
+From this result, we can see that the pipelet works as expected.
+It has added the facet value `'company_size': ['Large']`
+
+## Using the Pipelet
+### With the Squirro Data Loader
+For details on how to use this pipelet with the Squirro Data Loader, see [here](#)
+
+### Uploading the Pipelet to run Server-side
+The `squirro_asset` tool also allows for pipelets to be uploaded and run by Squirro automatically whenever any data is ingested. Details on how to upload and deploy pipelets to run server-side can be found [here](https://squirro.atlassian.net/wiki/display/DOC/Pipelets#Pipelets-Deploy)
