@@ -17,4 +17,5 @@ squirro_data_load -v \
     --map-id 'id' \
     --map-url 'link' \
     --map-created-at 'ipo_date' \
-    --facets-file 'facets.json'
+    --facets-file 'facets.json' \
+    --pipelets-file 'pipelets.json'

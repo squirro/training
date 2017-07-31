@@ -1,0 +1,7 @@
+{
+    "CompanySizePipelet": {
+        "file_location":"company_size.py",
+        "stage":"before templating",
+        "config": {}
+    }
+}
