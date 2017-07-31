@@ -21,6 +21,31 @@ To use a Pipelet with the Data Loader, the Data Load script must reference a Pip
 }
 ```
 
+Let's walk through this Configuration one line at a time.
+The Key for our pipelet configuration is the name of the Class that our pipelet file implments, which inherits from the PipletV1 base class from the Squirro SDK.
+This should match up __perfectly__ with the class definition within the pipelet file. In this case:
+```python
+"CompanySizePipelet": {
+```
+```python
+class CompanySizePipelet(PipeletV1):
+```
+
+The next step is to point the Data Loader to the source python file for the pipelet. This is typically done using a _relative_ path from the location of the pipelets.json file.
+```python
+"file_location":"company_size.py",
+```
+
+Next, we want to tell the Data Loader when to run the pipelet within the load process. Our options here are either `before templating` or `after templating`. Typically, you run a pipelet `before templating` if you want to have the results of that enrichment available for use in creating the title or body template.
+```python
+"stage":"before templating",
+```
+
+Finally, we can pass in any configuration required by the pipelet. This is typically where we will pass in any confidential information like api keys, tokens, etc. In this case, we have no configuration required by the pipelet, so we can pass in an empty object.
+```python
+"config": {}
+```
+
 For more information on Pipelet configuration files for the Squirro Data Loader, see the documentation [Here](https://squirro.atlassian.net/wiki/display/DOC/Data+Loader+Pipelet+Config+Reference)
 
 ## Our Test Data Set
