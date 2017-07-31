@@ -8,6 +8,13 @@ Pipelets are used to modify data once it has been transformed into the Squirro i
 ![alt text](https://docs.google.com/drawings/d/1QZnJN9j4B_MG8X98DLnkXagVF53S10EMiR34wcBH-wQ/pub?w=1258&amp;h=598 "Data Flow Diagram")
 
 For this reason, you should always design pipelets to work with data that exists in the Squirro item format shown below.
+##### Where can you run pipelets?
+As illustrated below, pipelets can be run either by the Squirro server as part of the standard pipeline whenever data is uploaded, or can be run by the Data Loader before data is uploaded to the Squirro server.
+In these diagrams, the red arrow indicates the flow of data through the system.
+###### Running within the data loader
+![alt text](https://docs.google.com/drawings/d/1dEiDytuAPpK4zgNjNt0a6W2iptZBDzqWinTfRWuuAys/pub?w=1258&amp;h=598 "Data Flow Diagram")
+###### Running server-side within the standard pipeline
+![alt text](https://docs.google.com/drawings/d/1ZBQE_9YCSkkPVSNo7Z1IrjUF3dmjLzrklKQpl1ga7JE/pub?w=1200&amp;h=462 "Data Flow Diagram")
 #### The Squirro item format
 Once transformed by the data loader, squirro items will always have the same structure. For example, one item could look like this:
 ```json
