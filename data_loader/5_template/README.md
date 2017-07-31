@@ -16,7 +16,7 @@ Within HTML contents, Jinja Templates will include additional elements within th
 * `#  ... ##` for Line Statements
 
 
-```jinja2
+```jinja
 <!DOCTYPE html>
 <html lang="en">
 <head>

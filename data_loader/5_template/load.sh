@@ -17,4 +17,6 @@ squirro_data_load -v \
     --map-id 'id' \
     --map-url 'link' \
     --map-created-at 'ipo_date' \
+    --title-template-file 'title.j2' \
+    --body-template-file 'body.j2' \
     --facets-file 'facets.json'
