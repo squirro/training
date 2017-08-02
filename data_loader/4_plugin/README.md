@@ -42,7 +42,17 @@ To make a data loader plugin, your python script should create an instance of th
 * `getArguments` - This method returns a list of dictionaries. Each dictionary specifies the details for a custom arugment which can be added by the plugin. These additional arguments allow you to pass additional information to the plugin as needed.
 
 ## Example Plugin
-Our example plugin...
+Our example plugin will get some fake post data from the web and add each post as a squirro document.
+To get this data, we will use a web API that gives us the fake data to work with. The API is very simple, and responds with JSON data for a fake post. For example:
+```bash
+$ curl http://jsonplaceholder.typicode.com/posts/1
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+}
+```
 ### Example Walkthrough
 We start off the file with a docstring that describes what this plugin does.
 Next we want to import everything that we need to make the plugin work, as well as the DataSource base class itself.
@@ -99,6 +109,7 @@ Next to implement is `getDataBatch`. Often it is easiest to handle the batching 
         if rows:
             yield rows
 ```
+Now we implement the function that talks to the API and gets the fake post data. We start by getting the desired number of posts from the arguments (which we will define later), and launching an iterative process for each post that we want to get
 ```python
     def get_example_posts(self):
         """Get some fake example posts from an API endpoint"""
@@ -106,7 +117,9 @@ Next to implement is `getDataBatch`. Often it is easiest to handle the batching 
         number_of_posts = self.args.number_of_posts
 
         for post_number in range(1, number_of_posts + 1):
-
+```
+To get a post, we assemble a URL to grab that post ID, and submit an HTTP GET requests to that URL. When we get a response, we load the JSON data from the response. The loaded JSON data is a representation of the post, and we can yield it.
+```python
             post_url = 'http://jsonplaceholder.typicode.com/'\
                       'posts/{number}'.format(
                             number=post_number)
@@ -115,27 +128,21 @@ Next to implement is `getDataBatch`. Often it is easiest to handle the batching 
             post_content = response.json()
 
             yield post_content
-
+```
+Next to implement is `getSchema`, which tells us which columns are available in the source data. In most cases it is best to get an example document from the data source and check which fields are available.
+In cases of extremely simple data sets, this can be hard coded.
+```python
     def getSchema(self):
-        """
-        Return the schema of the dataset
-        :returns a List containing the names of the columns retrieved from the
-        source
+        """Return the schema of the dataset
         """
 
-        schema = [
-            'userId',
-            'id',
-            'title',
-            'body'
-        ]
-
+        schema = ['userId', 'id', 'title', 'body']
         return schema
-
+```
+`getJobId` gets a unique job ID for the current data load. In general this is implemented as a hash of all the unique parameters or custom arguments used by the plugin.
+```python
     def getJobId(self):
-        """
-        Return a unique string for each different select
-        :returns a string
+        """Return a unique string for each different select
         """
         # Generate a stable id that changes with the main parameters
         m = hashlib.sha256()
@@ -143,10 +150,17 @@ Next to implement is `getDataBatch`. Often it is easiest to handle the batching 
         job_id = m.hexdigest()
         log.debug("Job ID: %s", job_id)
         return job_id
-
+```
+The last method to implement is `getArguments`. This tells the data loader which additional arguments are required by the plugin. When configuring an argument, you can use any attribute supported by the argparse library.
+A few things to note:
+* The type should be passed in as a string, instead of passing the type itself. For example:
+  * (Yes) `"type": "int",`
+  * (No) `"type": int,`
+* The `name` defined for an argument, is the name of the variable that that argument's value will be accessible at within the plugin. The name of the argument used in the load script will `--` followed by the name with `-` characters intead of underscores.
+  * In the example below, our argument has a name of `number_of_posts`. When writing the load script, you would pass this value in as `--number-of-posts`. You could then access that value within the pluin by accessing `self.args.number_of_posts`.
+```python
     def getArguments(self):
-        """
-        Get arguments required by the plugin
+        """Get arguments required by the plugin
         """
 
         return [
@@ -158,7 +172,6 @@ Next to implement is `getDataBatch`. Often it is easiest to handle the batching 
                 "type": "int",
             }
         ]
-
 ```
 
 
