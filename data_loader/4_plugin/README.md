@@ -41,7 +41,11 @@ To make a data loader plugin, your python script should create an instance of th
 * `getJobId` - This method should return a unique ID based on the parameters of the data loading job. This will often be a hash of any other parameters used.
 * `getArguments` - This method returns a list of dictionaries. Each dictionary specifies the details for a custom arugment which can be added by the plugin. These additional arguments allow you to pass additional information to the plugin as needed.
 
-## Example Walkthrough
+## Example Plugin
+Our example plugin...
+### Example Walkthrough
+We start off the file with a docstring that describes what this plugin does.
+Next we want to import everything that we need to make the plugin work, as well as the DataSource base class itself.
 ```python
 """
 Dataloader Plugin Example - Fake post data
@@ -49,44 +53,44 @@ Dataloader Plugin Example - Fake post data
 import hashlib
 import logging
 import requests
-
 from squirro.dataloader.data_source import DataSource
 
 log = logging.getLogger(__name__)
-
-
+```
+To start our implementation, we create a new instance of a class which inherits from the DataSource base class.
+```python
 class ExampleSource(DataSource):
     """
     An Example data loader Plugin
     """
-
+```
+If necessary, we can implement an initialization step to handle any initial configuration for the plugin.
+```python
     def __init__(self):
         pass
-
+```
+Next we can implement the `connect` method (if necessary)
+```python
     def connect(self, inc_column=None, max_inc_value=None):
         """Connect to the source"""
         # Nothing to do
         pass
-
+```
+and similarly the `disconnect` method (if necessary)
+```python
     def disconnect(self):
         """Disconnect from the source."""
         # Nothing to do
         pass
-
+```
+Next to implement is `getDataBatch`. Often it is easiest to handle the batching here, and tackle the process of actually fetching the data in another function.
+```python
     def getDataBatch(self, batch_size):
-        """
-        Generator - Get data from source on batches.
-
-        :returns a list of dictionaries
+        """Generator - Get data from source on batches.
         """
 
         rows = []
-
         for row in self.get_example_posts():
-            # Emit a `row` here that's flat dictionary. If that's not the case
-            # yet, transform it here.
-            # But do not return a Squirro item - that's the job of the data
-            # loader configuration (facets and mapping).
             rows.append(row)
             if len(rows) >= batch_size:
                 yield rows
@@ -94,7 +98,8 @@ class ExampleSource(DataSource):
 
         if rows:
             yield rows
-
+```
+```python
     def get_example_posts(self):
         """Get some fake example posts from an API endpoint"""
 
