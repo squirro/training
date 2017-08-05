@@ -1,0 +1,32 @@
+{
+    // See https://squirro.atlassian.net/wiki/display/DOC/Config+Reference
+
+    "id": {
+        "visible": false,
+        "searchable": false,
+        "typeahead": false,
+        "analyzed": false,
+    },
+    "company": {
+        "data_type": "string",
+        "display_name": "Company Name"
+    },
+    "ticker": {
+        "data_type": "string",
+        "display_name": "Ticker"
+    },
+    "ipo_date": {
+        "data_type": "datetime",
+        "input_format_string": "%Y-%m-%dT%H:%M:%S",
+        "format_instr": "calendar",
+        "display_name": "IPO Date"
+    },
+    "number_employees": {
+        "data_type": "int",
+        "display_name": "Number of Employees"
+    },
+    "link": {
+        "data_type": "string",
+        "display_name": "Link"
+    },
+}

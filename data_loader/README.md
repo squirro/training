@@ -1,6 +1,6 @@
 # Examples for the Squirro Data Loader
 Each folder is a separate example for how the Squirro Data Loader tool can be used to load data into squirro.
-It is recommended to go in order, starting with the CSV example. Each example will build on the previous example and add a new feature.
+It is highly recommended to go through these in order, starting with the CSV example. Each example will build on the previous example and add a new feature.
 
 ## Getting the data loader
 The Squirro Data Loader is distributed as part of the Squirro Toolbox. To install the Squirro Toolbox, follow the instructions [Here](https://github.com/squirro/training)
