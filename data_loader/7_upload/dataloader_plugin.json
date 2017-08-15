@@ -1,0 +1,7 @@
+{
+    "title": "Fake Post Data",
+    "description": "Load Lorem Ipsum Post data into Squirro",
+    "plugin_file": "post_plugin.py",
+    "requirements_file": "requirements.txt",
+    "category": "developers"
+}

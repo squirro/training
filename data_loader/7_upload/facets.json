@@ -1,0 +1,7 @@
+{
+    // See https://squirro.atlassian.net/wiki/display/DOC/Config+Reference
+    "userId": {
+        "data_type": "string",
+        "display_name": "User ID"
+    }
+}
