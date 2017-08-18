@@ -1,4 +1,4 @@
-# Using the Squriro Data Loader to Load a CSV File
+# Using the Squirro Data Loader to Load a CSV File
 
 ## Testing the Data Loader
 Before we start, let's test that the Squirro Data Loader is installed and ready to use. To check for this, try to run the Data Loader and just show the help. This will let us make sure that the Data Loader is installed and set up correctly.
@@ -28,12 +28,12 @@ The CSV file that we will load as a test has a list of companies with some basic
 |5|Intel|INTC|1978-01-13T00:00:00|106000|https://finance.yahoo.com/quote/INTC|
 
 ## Constructing a Load Script
-Because the Squirro Data Loader takes lots of paramters as inputs, we will construct a load script which calls the dataloader with all of the required paramters included.
+Because the Squirro Data Loader takes lots of parameters as inputs, we will construct a load script which calls the dataloader with all of the required parameters included.
 
 The example here is shown as a bash script, used on Linux or MacOS. For Windows, Batch scripts are used in place.
 
 An example of a load script written in bash is included in `load.sh`.
-We wil go through this example load script line by line
+We will go through this example load script line by line
 
 ```bash
 #!/bin/bash
@@ -41,7 +41,7 @@ set -e
 ```
 
 The very first line of this script tells us that it is a bash script, and instructs the computer on how to execute it.
-The second line `set -e` tells bash that the execution fo the script should stop if the script encounters an error. By default, bash scripts will continue running even after the script encounters an error.
+The second line `set -e` tells bash that the execution of the script should stop if the script encounters an error. By default, bash scripts will continue running even after the script encounters an error.
 
 ```bash
 CLUSTER="http://...squirro.net/"
@@ -81,7 +81,7 @@ The source arguments tell the Data Loader what kind of data we are loading and w
     --map-created-at 'ipo_date' \
 ```
 
-Once the source data is defined, the next step is to map fields in the input data to the main fields within the squirro items created. This tells the data loader which column should be used for the body, title, id, url, and created_at date for each item that the data loader sends to squirro. The fields listed in single quotes on the right are the columns of the CSV file that are being used for each field of the squirro item.
+Once the source data is defined, the next step is to map fields in the input data to the main fields within the Squirro items created. This tells the data loader which column should be used for the body, title, id, url, and created_at date for each item that the data loader sends to Squirro. The fields listed in single quotes on the right are the columns of the CSV file that are being used for each field of the Squirro item.
 
 ```bash
     --facets-file 'facets.json'

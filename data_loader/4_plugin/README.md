@@ -1,14 +1,14 @@
-# Custom Plugins for the Squriro Data Loader
+# Custom Plugins for the Squirro Data Loader
 
-This example shows how custom plugins can be created for the Squirro Data Loader. While the Data Loader supports connections to csv files, excel sheets, and SQL databases out of the box, these plugins allow the data loader to connect to any data source imaginable.
+This example shows how custom plugins can be created for the Squirro Data Loader. While the Data Loader supports connections to CSV files, excel sheets, and SQL databases out of the box, these plugins allow the data loader to connect to any data source imaginable.
 
 ## How do plugins work
 
-Plugins are implemented as python scripts which have a few methods that they must implement. Beyond that, there are really no rules. Plugins can do just about anything under the sun as long as they return usible data in the following format
+Plugins are implemented as python scripts which have a few methods that they must implement. Beyond that, there are really no rules. Plugins can do just about anything under the sun as long as they return usable data in the following format
 
 ### Data Format
 
-Contrary to what you may guess at first, Data Loader Plugins __Do Not__ return data in the squirro item format, but produce flat JSON objects. The data that is produced by your data loader plugin should look like this:
+Contrary to what you may guess at first, Data Loader Plugins __Do Not__ return data in the Squirro item format, but produce flat JSON objects. The data that is produced by your data loader plugin should look like this:
 ```json
 {
     "document_title": "...",
@@ -27,7 +27,7 @@ It is also important to note that if one of these fields has multiple values, th
     # No
     "tags": ["tech", "software", "AI"],
 ```
-The transition from flat JSON data into the squirro item format is done automatically by the data loader as shown below:
+The transition from flat JSON data into the Squirro item format is done automatically by the data loader as shown below:
 
 ![alt text](https://docs.google.com/drawings/d/1QZnJN9j4B_MG8X98DLnkXagVF53S10EMiR34wcBH-wQ/pub?w=1258&amp;h=598 "Data Flow Diagram")
 
@@ -39,10 +39,10 @@ To make a data loader plugin, your python script should create an instance of th
 * `getDataBatch` - The method (implemented as a generator) which is called to get batches of data from the plugin
 * `getSchema` - A method which returns a list of all the fields within each of the items returned by the plugin. This tells the Data Loader which fields are available for mapping with `--map-id`, `--map-title`, `--map-body`, etc.
 * `getJobId` - This method should return a unique ID based on the parameters of the data loading job. This will often be a hash of any other parameters used.
-* `getArguments` - This method returns a list of dictionaries. Each dictionary specifies the details for a custom arugment which can be added by the plugin. These additional arguments allow you to pass additional information to the plugin as needed.
+* `getArguments` - This method returns a list of dictionaries. Each dictionary specifies the details for a custom argument which can be added by the plugin. These additional arguments allow you to pass additional information to the plugin as needed.
 
 ## Example Plugin
-Our example plugin will get some fake post data from the web and add each post as a squirro document.
+Our example plugin will get some fake post data from the web and add each post as a Squirro document.
 To get this data, we will use a web API that gives us the fake data to work with. The API is very simple, and responds with JSON data for a fake post. For example:
 ```bash
 $ curl http://jsonplaceholder.typicode.com/posts/1
@@ -156,8 +156,8 @@ A few things to note:
 * The type should be passed in as a string, instead of passing the type itself. For example:
   * (Yes) `"type": "int",`
   * (No) `"type": int,`
-* The `name` defined for an argument, is the name of the variable that that argument's value will be accessible at within the plugin. The name of the argument used in the load script will `--` followed by the name with `-` characters intead of underscores.
-  * In the example below, our argument has a name of `number_of_posts`. When writing the load script, you would pass this value in as `--number-of-posts`. You could then access that value within the pluin by accessing `self.args.number_of_posts`.
+* The `name` defined for an argument, is the name of the variable that that argument's value will be accessible at within the plugin. The name of the argument used in the load script will `--` followed by the name with `-` characters instead of underscores.
+  * In the example below, our argument has a name of `number_of_posts`. When writing the load script, you would pass this value in as `--number-of-posts`. You could then access that value within the plugin by accessing `self.args.number_of_posts`.
 ```python
     def getArguments(self):
         """Get arguments required by the plugin

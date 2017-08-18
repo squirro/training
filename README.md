@@ -5,10 +5,10 @@ Included here are a set of examples and training resources meant to accompany th
 ## Getting Started
 
 ### Requirements
-To use the examples here, you will need to install the squirro toolbox. The Squirro toolbox is available to all Squirro Partners and Developers [Here](https://squirro.atlassian.net/wiki/display/DOC/Toolbox). If you would like access to the Squirro Data Loader, please contact support@squirro.com.
+To use the examples here, you will need to install the Squirro toolbox. The Squirro toolbox is available to all Squirro Partners and Developers [Here](https://squirro.atlassian.net/wiki/display/DOC/Toolbox). If you would like access to the Squirro Data Loader, please contact support@squirro.com.
 
 ### Python
-To use the Squirro Toolbox, you must have Python2 intalled. Please note that the Squirro toolbox does not support Python3 (yet).
+To use the Squirro Toolbox, you must have Python 2 installed. Please note that the Squirro toolbox does not support Python 3 (yet).
 
 It is recommended to install python via [Homebrew](https://brew.sh/)
 ```bash
@@ -16,7 +16,7 @@ $ brew install python
 ```
 
 ### Virtualenvs
-While not required, it is highly recommended that you create a virtual environment to use for squirro development.
+While not required, it is highly recommended that you create a virtual environment to use for Squirro development.
 
 To create a virtual environment, run the commands below (after you have Python installed)
 

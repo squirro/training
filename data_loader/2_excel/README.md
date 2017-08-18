@@ -1,4 +1,4 @@
-# Using the Squriro Data Loader to Load an Excel spreadsheet
+# Using the Squirro Data Loader to Load an Excel spreadsheet
 
 ## Setup
 Before attempting this, it is assumed that the Squirro Data Loader has already been set up. For details on how to do the initial configuration, follow the instructions [here](#)
