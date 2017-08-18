@@ -1,5 +1,5 @@
 # Examples for the Squirro Data Loader
-Each folder is a separate example for how the Squirro Data Loader tool can be used to load data into squirro.
+Each folder is a separate example for how the Squirro Data Loader tool can be used to load data into Squirro.
 It is highly recommended to go through these in order, starting with the CSV example. Each example will build on the previous example and add a new feature.
 
 ## Getting the data loader
@@ -14,11 +14,11 @@ The Squirro Data Loader is distributed as part of the Squirro Toolbox. To instal
 
 ## What does the Data Loader do?
 Long story short, the data loader makes it easy to load data from any source into Squirro.
-The dataloader will allow you to load data from CSV files, Excel Spreadsheets, and SQL databases out of the box, and can be extended throuh the use of Data Loader Plugins to be able to connect to any data source.
+The dataloader will allow you to load data from CSV files, Excel Spreadsheets, and SQL databases out of the box, and can be extended through the use of Data Loader Plugins to be able to connect to any data source.
 For more details on Data Loader plugins, see the README in the `plugin` folder here
 
 ### The Squirro item format
-For data to be loaded, it has to be converted into the standard format used by all squirro items. The standard squirro item format is always a JSON object, and looks like this:
+For data to be loaded, it has to be converted into the standard format used by all Squirro items. The standard Squirro item format is always a JSON object, and looks like this:
 ```json
 {
   "body": "Squirro is...",
@@ -38,6 +38,6 @@ For data to be loaded, it has to be converted into the standard format used by a
   "abstract": "abstract text"
 }
 ```
-The standard squirro item format has a set of reserved fields (`title`, `body`, `id`, `link`, `created_at`, and `abstract`) which exist in the top level of the JSON object.
+The standard Squirro item format has a set of reserved fields (`title`, `body`, `id`, `link`, `created_at`, and `abstract`) which exist in the top level of the JSON object.
 
-All other information that is included in a squirro item will be nested within an object within the top-level key `keywords`. Fields included here can have lists of values instead of only single values, and are referred to as facets. In the example shown above, the item has a single facet called "Countries", which has a total of 5 facet values
+All other information that is included in a Squirro item will be nested within an object within the top-level key `keywords`. Fields included here can have lists of values instead of only single values, and are referred to as facets. In the example shown above, the item has a single facet called "Countries", which has a total of 5 facet values

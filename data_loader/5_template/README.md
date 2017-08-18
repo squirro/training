@@ -1,10 +1,10 @@
-# Using Title and Body templates with the Squriro Data Loader
+# Using Title and Body templates with the Squirro Data Loader
 
 This example shows how Jinja2 Templates can be used to generate complex title and body contents from the data included within a squirro item.
 
 ## What is a Jinja2 Template?
 
-Within Squirro, Jinja templates allow you to programatically generate HTML based on the contents of a given Squirro item or row of input data.
+Within Squirro, Jinja templates allow you to programmatically generate HTML based on the contents of a given Squirro item or row of input data.
 
 ### Template Basics
 

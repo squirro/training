@@ -1,4 +1,4 @@
-# Using Pipelets with the Squriro Data Loader
+# Using Pipelets with the Squirro Data Loader
 
 This example shows how Pipelets can be used by the Data Loader to enrich data before it is uploaded to a Squirro server.
 
@@ -9,7 +9,7 @@ For more information on Pipelets, see the example [Here](https://github.com/squi
 
 ### Pipelet configuration basics
 
-To use a Pipelet with the Data Loader, the Data Load script must reference a Pipelet configutation file. This pipelet configuration file specifies which pipelets will be included, where the source code for each pipelet can be found, when the pipelets should be run, and any configuration required by the pipelet.
+To use a Pipelet with the Data Loader, the Data Load script must reference a Pipelet configuration file. This pipelet configuration file specifies which pipelets will be included, where the source code for each pipelet can be found, when the pipelets should be run, and any configuration required by the pipelet.
 
 ```json
 {
@@ -22,7 +22,7 @@ To use a Pipelet with the Data Loader, the Data Load script must reference a Pip
 ```
 
 Let's walk through this Configuration one line at a time.
-The Key for our pipelet configuration is the name of the Class that our pipelet file implments, which inherits from the PipletV1 base class from the Squirro SDK.
+The Key for our pipelet configuration is the name of the Class that our pipelet file implements, which inherits from the PipletV1 base class from the Squirro SDK.
 This should match up __perfectly__ with the class definition within the pipelet file. In this case:
 ```python
 "CompanySizePipelet": {
@@ -41,7 +41,7 @@ Next, we want to tell the Data Loader when to run the pipelet within the load pr
 "stage":"before templating",
 ```
 
-Finally, we can pass in any configuration required by the pipelet. This is typically where we will pass in any confidential information like api keys, tokens, etc. In this case, we have no configuration required by the pipelet, so we can pass in an empty object.
+Finally, we can pass in any configuration required by the pipelet. This is typically where we will pass in any confidential information like API keys, tokens, etc. In this case, we have no configuration required by the pipelet, so we can pass in an empty object.
 ```python
 "config": {}
 ```

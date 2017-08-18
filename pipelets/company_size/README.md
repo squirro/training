@@ -52,9 +52,9 @@ This is typically a good way to implement the constructor for a pipelet. As the 
         number_of_employees = int(number_of_employees)
 ```
 
-Next we start implementing the `consume()` method of the pipelet, which takes the contents of a squirro item as the input, and returns a processed version of the same squirro item.
+Next we start implementing the `consume()` method of the pipelet, which takes the contents of a Squirro item as the input, and returns a processed version of the same Squirro item.
 
-The first step for this pipelet is to fetch the number of employees at the company from within the facet data. Because of the standard squirro item format, facet data is:
+The first step for this pipelet is to fetch the number of employees at the company from within the facet data. Because of the standard Squirro item format, facet data is:
 * Always stored in lists
 * The list is always located within `item['keywords'][facet_name]`
 
@@ -86,7 +86,7 @@ Once we have the number of employees stored as an integer, the next step is to d
 Once we have the company size figured out, we can include the company size information in a new facet. In this example, we are putting the value in a facet called `company_size`. It's important to note that we don't assign the value directly as the facet value, but assign it within a list.
 
 ## Testing the Pipelet
-To test this pielet, we will have the pipelet consume the test item stored in `test_item.json`, and print the result. Our test item is a JSON object in the squirro item format that has all of the needed data for Apple. It looks like this:
+To test this pipelet, we will have the pipelet consume the test item stored in `test_item.json`, and print the result. Our test item is a JSON object in the Squirro item format that has all of the needed data for Apple. It looks like this:
 ```json
 {
     "id": "1",
