@@ -3,7 +3,7 @@
 This example shows how custom plugins can be created for the Squirro Data Loader, and used within the Squirro web UI. As long as a few rules are followed, any plugin can be uploaded to Squirro and used within the UI.
 Once uploaded, the plugin will appear in the UI as shown below:
 
-![alt text](https://lh5.googleusercontent.com/oxsG1i-fx3Dv-07kvtDbD4WJPjXk7NmCZdY1-CRbwXqLuJXq6Uh46gYPtblYHICEe6r9xBcNigfmK2c=w2560-h1958-rw, "An uploaded Plugin")
+![alt text](https://lh5.googleusercontent.com/oxsG1i-fx3Dv-07kvtDbD4WJPjXk7NmCZdY1-CRbwXqLuJXq6Uh46gYPtblYHICEe6r9xBcNigfmK2c=w2560-h1958-rw "An uploaded Plugin")
 
 ## Plugin Design
 Compared to designing a plugin to work with the Squirro Data Loader via the command line, there are a few more rules which must be followed.
