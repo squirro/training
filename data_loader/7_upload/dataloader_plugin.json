@@ -3,6 +3,6 @@
     "description": "Load Lorem Ipsum Post data into Squirro",
     "plugin_file": "post_plugin.py",
     "requirements_file": "requirements.txt",
-    "category": "developers",
+    "category": "web",
     "thumbnail_file": "post.png"
 }
