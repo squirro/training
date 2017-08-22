@@ -1,5 +1,7 @@
 # Using custom plugins for the Squriro Data Loader in the frontend
 
+### NOTE: Uploading plugins requires Squirro Version 2.5.0 or later. For users running Squirro version 2.4.X, it is recommended to use the Data Loader from the command line only
+
 This example shows how custom plugins can be created for the Squirro Data Loader, and used within the Squirro web UI. As long as a few rules are followed, any plugin can be uploaded to Squirro and used within the UI.
 Once uploaded, the plugin will appear in the UI as shown below:
 
