@@ -29,6 +29,7 @@
         "company": {
             "min_score": 0.8,
             "ngram": "company",
+            "suffix_list": "company",
             "clean_keywords": [
                 "company",
                 "company_kee_version"
