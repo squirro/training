@@ -9,7 +9,7 @@ squirro_data_load -v \
     --token $TOKEN \
     --project-id $PROJECT_ID \
     --source-type csv \
-    --source-file 'people.csv' \
+    --source-file 'people_10k.csv' \
     --source-name 'People' \
     --facets-file 'facets.json' \
     --title-template-file 'title_template.j2' \
