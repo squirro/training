@@ -1,0 +1,18 @@
+{
+    "last_name": {
+        "data_type": "string",
+        "display_name": "Last Name"
+    },
+    "gender": {
+        "data_type": "string",
+        "display_name": "Gender"
+    },
+    "first_name": {
+        "data_type": "string",
+        "display_name": "First Name"
+    },
+    "age": {
+        "data_type": "int",
+        "display_name": "Age"
+    }
+}
