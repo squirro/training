@@ -197,6 +197,10 @@ Valid types for this step are:
 ```
 
 #### Checkpoint
+Checkpoint steps are used to save the current progress of the pipeline to disk. This is also a good way to randomize or shuffle the order of the input data before a step like classification.
+
+Valid types for this step are:
+* `disk`
 
 ```json
     {
@@ -208,11 +212,19 @@ Valid types for this step are:
 ```
 
 #### Classification
+Classification is where a label for the document is predicted based on the input.
+There are a few different classification models that can be used based on the amount of training data and the details of the specific classification task.
+
+Valid types for this step are:
+* `sklearn`
+* `cnn_seq2one`
+* `rnn_seq2one`
+* `seq2seq`
 
 ```json
     {
       "step": "classifier",
-      "type": "seq2one",
+      "type": "rnn_seq2one",
       "batch_size": 1024,
       "dict_name": "dictionary",
       "dropout_fraction": 0.5,
@@ -232,6 +244,11 @@ Valid types for this step are:
 ```
 
 #### Saving
+The saving step involves writing the updated values including the prediction back into the original data source. This will typically involve writing the prediction back into the squirro items, but can also be used to save a copy of the data set to disk for further analysis.
+
+Valid types for this step are:
+* `json`
+* `squirro_item`
 
 ```json
     {
