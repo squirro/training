@@ -82,6 +82,17 @@ The step has two keys which will always be present:
 
 #### Loader Step
 The loader step is responsible for providing the iems to be consumed by the model.
+Loaders can get content from flat files like CSV or JSON files, raw text files, or Squirro.
+Valid types for the type are:
+* `csv`
+* `file`
+* `json`
+* `squirro_item`
+* `squirro_query`
+
+You can also specify which specific columns or fields you want to import to make loading faster and more efficient.
+
+When the loader step gets content, it will always turn it into a flat dictionary before passing it to the next step in the pipeline.
 
 ```json
     {
@@ -96,6 +107,16 @@ The loader step is responsible for providing the iems to be consumed by the mode
 
 #### Filtering
 Filtering steps can be used to remove items with invalid or useless data, like missing values.
+
+Valid types for the step are:
+* `aggregate`
+* `blacklist`
+* `empty`
+* `join`
+* `merge`
+* `presence`
+* `split`
+* `window`
 
 ```json
     {
@@ -115,6 +136,14 @@ Filtering steps can be used to remove items with invalid or useless data, like m
 ```
 
 #### Normalization
+Normalization is used to reduce variety in the input data, and make the input data more consistent.
+
+Valid types for this step are:
+* `character`
+* `html`
+* `lowercase`
+* `punctuation`
+* `stopwords`
 
 ```json
     {
@@ -132,6 +161,11 @@ Filtering steps can be used to remove items with invalid or useless data, like m
 ```
 
 #### Tokenization
+Tokenization allows you to split your input from continuous text into a sequence of discrete tokens.
+
+Valid types for this step are:
+* `sentences`
+* `spaces`
 
 ```json
     {
@@ -144,6 +178,13 @@ Filtering steps can be used to remove items with invalid or useless data, like m
 ```
 
 #### Embedding
+Embedding allows you to turn each of the tokens in the input into an embedding, which is a vector representation of the original token. This is required to make processing the input easier for the later stages like classification, clustering, and regression.
+
+Valid types for this step are:
+* `bow`
+* `dictionary`
+* `doc2vec`
+* `glove`
 
 ```json
     {
