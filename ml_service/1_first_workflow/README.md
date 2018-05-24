@@ -51,12 +51,37 @@ Here, you can use the standard Squirro query syntax to specify which subsets of 
 ```
 
 ### Building the Pipeline
+The pipeline defines the series of steps that all of the data goes through. This includes both data that is being used to train the model, as well as data that is being processed by the trained model.
 
 ```json
   "pipeline": [
 ```
 
+#### Pipeline Step Format
+Every step in the pipeline has a consistent format.
+The step has two keys which will always be present:
+* `step`: Specifies the broad type of operation that the step performs. Valid options are:
+  * `loader`
+  * `filter`
+  * `normalizers`
+  * `tokenizer`
+  * `embedder`
+  * `checkpoint`
+  * `classifier`
+  * `clusterer`
+  * `saver`
+* `type`: Specifies the specific implementation of that type of step to use. For example, a loader step can be either a `squirro_query_loader`, a `json_loader`, or a `csv_loader`.
+
+```json
+    {
+      "step": "general-type",
+      "type": "specific-type",
+      // Additional config options for the step
+    },
+```
+
 #### Loader Step
+The loader step is responsible for providing the iems to be consumed by the model.
 
 ```json
     {
@@ -70,6 +95,7 @@ Here, you can use the standard Squirro query syntax to specify which subsets of 
 ```
 
 #### Filtering
+Filtering steps can be used to remove items with invalid or useless data, like missing values.
 
 ```json
     {
@@ -138,6 +164,11 @@ Here, you can use the standard Squirro query syntax to specify which subsets of 
       "do_randomize": true,
       "batch_size": 1
     },
+```
+
+#### Classification
+
+```json
     {
       "step": "classifier",
       "type": "seq2one",
@@ -157,6 +188,11 @@ Here, you can use the standard Squirro query syntax to specify which subsets of 
       "n_epochs": 10,
       "output_field": "keywords.pred_gender"
     },
+```
+
+#### Saving
+
+```json
     {
       "step": "saver",
       "type": "squirro_item",
