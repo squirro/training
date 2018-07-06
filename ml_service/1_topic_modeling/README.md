@@ -1,5 +1,13 @@
 # 20 newsgroups topic modeling
 
+To first fetch the data, be sure to have `awscli` installed:
+
+    pip install awscli
+
+and then execute:
+
+    ./fetch.sh
+
 This is a [Jupyter notebook](http://jupyter.org/) walkthrough, and requires jupyter to be installed:
 
     pip install jupyter
