@@ -1,0 +1,14 @@
+{
+  "dataset": {
+    "name": "dataset",
+    "searchable": true,
+    "typeahead": true,
+    "visible": true
+  },
+  "label": {
+    "name": "label",
+    "searchable": true,
+    "typeahead": true,
+    "visible": true
+  }
+}
