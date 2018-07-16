@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# -- Do not run this script directly.
+# -- It should be run from the Jupyter Notebook
+# -- as part of the Topic Modeling Walkthrough
+
 CLUSTER=$1
 TOKEN=$2
 PROJECT_ID=$3
