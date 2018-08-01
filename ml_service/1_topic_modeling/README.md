@@ -1,10 +1,6 @@
 # 20 newsgroups topic modeling
 
-To first fetch the data, be sure to have `awscli` installed:
-
-    pip install awscli
-
-and then execute:
+First fetch the data by executing:
 
     ./fetch.sh
 
