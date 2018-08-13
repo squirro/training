@@ -2,6 +2,7 @@
 Pipelet to find forward-looking deals and create entities for them
 """
 
+import json
 import nltk
 from bs4 import BeautifulSoup
 from squirro.sdk import PipeletV1, require
@@ -12,7 +13,8 @@ from squirro_client import SquirroClient
 class ForwardInterestDealsPipelet(PipeletV1):
 
     def __init__(self, config):
-        self.config = config
+        with open('pipelet_config.json', 'rb') as f:
+            self.config = json.load(f)['ForwardInterestDealsPipelet']['config']
         self.client = self._get_client()
 
         self.models_project_id = self.config.get('models_project_id')
@@ -97,6 +99,10 @@ class ForwardInterestDealsPipelet(PipeletV1):
         '''
         # Create entity
         text = sentence_item['text']
+        offset = item.get('body', '').find(text)
+        if offset < 0:
+            offset = None
+            self.log.warn('Could not find text: %r', text)
         new_entity = {
             "type": "interest",
             "name": "Interest Entity",
@@ -106,7 +112,7 @@ class ForwardInterestDealsPipelet(PipeletV1):
                 "text": text,
                 "field": "body",
                 "confidence": 1,
-                "offset": item.get('body', '').find(text) or 0,
+                "offset": offset,
                 "length": len(text),
             }],
             "properties": properties
