@@ -1,0 +1,54 @@
+{
+  "dataset": {
+    "train": {"query_string": "dataset:train"},
+    "test": {"query_string": "dataset:test"}
+  },
+  "analyzer": {
+    "type": "classification",
+    "label_field": "keywords.label",
+    "tag_field": "keywords.label_pred"
+  },
+  "pipeline": [{
+    "step": "loader",
+    "type": "squirro_query",
+    "fields": ["body", "keywords.label"]
+  },{
+    "step": "normalizers",
+    "types": ["html", "punctuation", "lowercase", "character"],
+    "fields": ["body"]
+  },{
+    "step": "tokenizer",
+    "type": "spaces",
+    "fields": ["body"]
+  },{
+    "step": "randomizer",
+    "type": "disk"
+  },{
+    "step": "embedder",
+    "type": "tfidf",
+    "input_field": "body",
+    "output_field": "embedded_body"
+  },{
+    "step": "projector",
+    "type": "sklearn",
+    "name": "projector-sklearn",
+    "model_type": "svd",
+    "n_components": 128,
+    "input_field": "embedded_body",
+    "output_field": "embedded_body"
+  },{
+    "step": "classifier",
+    "type": "sklearn",
+    "explanation_field": "explanantion",
+    "input_fields": ["embedded_body"],
+    "label_field": "keywords.label",
+    "model_kwargs": {"loss": "log"},
+    "model_type": "SGDClassifier",
+    "output_field": "keywords.label_pred",
+    "use_sparse": true
+  },{
+    "step": "saver",
+    "type": "squirro_item",
+    "fields": ["keywords.label_pred"]
+  }]
+}

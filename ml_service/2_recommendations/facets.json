@@ -1,0 +1,18 @@
+{
+  "link": {
+    "data_type": "string",
+    "group_name": "Transcripts"
+  },
+  "company_name": {
+    "data_type": "string",
+    "group_name": "Transcripts"
+  },
+  "company_ticker": {
+    "data_type": "string",
+    "group_name": "Transcripts"
+  },
+  "type": {
+    "data_type": "string",
+    "group_name": "Transcripts"
+  }
+}
