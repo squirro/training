@@ -1,0 +1,32 @@
+{
+  "dataset": {
+    "train": {"query_string": "dataset:train"},
+    "test": {"query_string": "dataset:test"}
+  },
+  "analyzer": {
+    "type": "classification",
+    "label_field": "keywords.label",
+    "tag_field": "keywords.label_pred"
+  },
+  "pipeline": [{
+    "step": "loader",
+    "type": "squirro_query",
+    "fields": ["body", "keywords.label"]
+  },{
+    "step": "normalizers",
+    "types": ["html", "punctuation", "lowercase", "character"],
+    "fields": ["body"]
+  },{
+    "step": "classifier",
+    "type": "fasttext",
+    "explanation_field": "explanantion",
+    "input_field": "body",
+    "label_field": "keywords.label",
+    "output_field": "keywords.label_pred",
+    "quantize": true
+  },{
+    "step": "saver",
+    "type": "squirro_item",
+    "fields": ["keywords.label_pred"]
+  }]
+}

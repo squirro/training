@@ -15,10 +15,10 @@ squirro_data_load \
     --source-name 'Transcript Corpus' \
     --batch-size 1000 \
     --source-batch-size 1000 \
-    --map-title 'title' \
     --map-body 'body' \
     --map-id 'id' \
     --map-url 'link' \
     --map-created-at 'created_at' \
+    --map-title 'title' \
     --facets-file $DATADIR/facets.json \
     --pipelets-file $DATADIR/pipelet_config.json

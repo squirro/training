@@ -24,8 +24,6 @@ class ForwardInterestDealsPipelet(PipeletV1):
             "forward_interest_threshold")
         self.deal_type_workflow = self.config.get("deal_type_workflow_id")
         self.deal_type_threshold = self.config.get("deal_type_threshold")
-        self.industry_workflow = self.config.get("industry_workflow_id")
-        self.industry_threshold = self.config.get("industry_threshold")
 
         nltk.download('punkt')
 
@@ -56,10 +54,6 @@ class ForwardInterestDealsPipelet(PipeletV1):
         deal_type_predictions = self.get_predictions(
             self.deal_type_workflow, forward_interest_sentence_items)
 
-        # Check for relevant industries
-        industry_predictions = self.get_predictions(
-            self.industry_workflow, forward_interest_sentence_items)
-
         for sentence_item in forward_interest_sentence_items:
             properties = {}
 
@@ -69,13 +63,7 @@ class ForwardInterestDealsPipelet(PipeletV1):
                 deal_type_predictions[sentence_item['id']],
                 self.deal_type_threshold)
 
-            # Get max industry prediction
-            self.add_property(
-                properties, 'industry',
-                industry_predictions[sentence_item['id']],
-                self.industry_threshold)
-
-            # Early exit if no deal type or industry is strongly matched
+            # Early exit if no deal type is strongly matched
             if not properties:
                 continue
 

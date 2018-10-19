@@ -1,0 +1,1 @@
+{"label_map": {"m&a": 9, "earnings": 7, "management_change": 6, "ipo": 8, "legal": 2, "divestiture": 1, "expansion": 0, "equity": 4, "debt": 3, "bankruptcy": 5}, "input_size": 128, "label_size": 10, "input_map": {"embedded_body": 0}}
