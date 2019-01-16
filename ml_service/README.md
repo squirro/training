@@ -1,6 +1,14 @@
 # Machine Learning Service Examples
 Included here are a set of examples meant to get you up and running with the Machine Learning Service built into Squirro version `2.6+`.
 
+## Prerequisites
+
+You'll need wget to run some of the scripts. E.g. on OSX, run:
+
+```bash
+$ brew install wget
+```
+
 ## Installing Jupyter
 
 The walkthroughs for the Machine Learning Service are built as [Jupyter notebooks](http://jupyter.org/), and require jupyter to be installed:
