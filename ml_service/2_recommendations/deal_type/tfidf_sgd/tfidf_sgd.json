@@ -13,8 +13,20 @@
     "type": "squirro_query",
     "fields": ["body", "keywords.label"]
   },{
-    "step": "normalizers",
-    "types": ["html", "punctuation", "lowercase", "character"],
+    "step": "normalizer",
+    "type": "html",
+    "fields": ["body"]
+  },{
+    "step": "normalizer",
+    "type": "punctuation",
+    "fields": ["body"]
+  },{
+    "step": "normalizer",
+    "type": "lowercase",
+    "fields": ["body"]
+  },{
+    "step": "normalizer",
+    "type": "character",
     "fields": ["body"]
   },{
     "step": "tokenizer",
