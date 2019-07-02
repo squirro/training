@@ -12,11 +12,28 @@
     "step": "loader",
     "type": "squirro_query",
     "fields": ["body", "keywords.label"]
-  },{
+  },
+  {
     "step": "normalizers",
-    "types": ["html", "punctuation", "lowercase", "character"],
+    "type": "html",
     "fields": ["body"]
-  },{
+  },
+  {
+    "step": "normalizers",
+    "type": "punctuation",
+    "fields": ["body"]
+  },
+  {
+    "step": "normalizers",
+    "type": "lowercase",
+    "fields": ["body"]
+  },
+  {
+    "step": "normalizers",
+    "type": "character",
+    "fields": ["body"]
+  },
+  {
     "step": "classifier",
     "type": "fasttext",
     "explanation_field": "explanantion",
@@ -24,7 +41,8 @@
     "label_field": "keywords.label",
     "output_field": "keywords.label_pred",
     "quantize": true
-  },{
+  },
+  {
     "step": "saver",
     "type": "squirro_item",
     "fields": ["keywords.label_pred"]
