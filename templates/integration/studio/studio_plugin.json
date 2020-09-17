@@ -1,0 +1,5 @@
+{
+    // For Full documentation see: https://nektoon.atlassian.net/wiki/spaces/ENG/pages/180995718/Writing+Squirro+Studio+Plugins#WritingSquirroStudioPlugins-studio_plugin.json
+    "title": "Studio Template",
+    "location": "load"
+}

@@ -1,0 +1,37 @@
+#Installation
+
+#adjust all paths to match your app
+
+#create pid folder
+#mkdir /var/run/squirro/yourapp/
+
+#give permission to the user
+#chown -R sqfront /var/run/squirro/yourapp
+
+#ensure the user owns the app and can write logs
+#chown -R sqfront /opt/yourapp/integration/webapp
+
+#whenever you make changes to this file:
+#systemctl daemon-reload; systemctl start your_app;
+
+#check if its running
+#systemctl status your_app;
+
+
+[Unit]
+Description=Your Flask App
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/var/run/squirro/yourapp/yourapp.pid
+User=sqfront
+EnvironmentFile=/etc/sysconfig/squirro
+WorkingDirectory=/opt/yourapp/integration/webapp/
+
+ExecStart=/opt/squirro/virtualenv/bin/gunicorn flask_app:app --pid=/var/run/squirro/yourapp/els.pid -b :8181 -w 4 --log-file /opt/yourapp/integration/webapp/flask_app.log --log-level DEBUG --reload
+TimeoutStopSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

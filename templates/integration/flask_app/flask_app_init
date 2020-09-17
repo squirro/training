@@ -1,0 +1,89 @@
+#!/bin/sh
+# chkconfig:   - 97 03
+# description: Starts and stops the flask app
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+. /opt/rh/python27/enable
+. /opt/squirro/virtualenv/bin/activate
+
+name="flask_app"
+exec="/opt/squirro/virtualenv/bin/gunicorn"
+pidfile="/var/run/squirro/flask_app.pid"
+
+
+start() {
+    [ -x $exec ] || exit 5
+    echo -n $"Starting $name: "
+    cd /apps/squirro/flask_app
+    $exec flask_app:app --daemon --pid=$pidfile -b :8181 -w 4  --log-file flask_app.log --log-level DEBUG --reload
+
+    retval=$?
+    echo
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping $name: "
+    if [ -f $pidfile ]
+    then
+        killproc -p $pidfile -d 10 $name
+        retval=$?
+    else
+        success "$name shutdown"
+        retval=0
+    fi
+    echo
+    return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+reload() {
+    false
+}
+
+rh_status() {
+    status -p $pidfile $name
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    reload)
+        rh_status_q || exit 7
+        $1
+        ;;
+    force-reload)
+        force_reload
+        ;;
+    status)
+        rh_status
+        ;;
+    condrestart|try-restart)
+        rh_status_q || exit 0
+        restart
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart}"
+        exit 2
+esac
+exit $?

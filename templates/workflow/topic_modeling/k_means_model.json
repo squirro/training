@@ -1,0 +1,276 @@
+{
+    "analyzer": {
+        "label_field": "keywords.category",
+        "tag_field": "keywords.topics_kmeans",
+        "type": "topic_modeling"
+    },
+    "dataset": {
+        "infer": {
+            "query_string": "NOT ml_train:train NOT ml_version:ml_kmean_v1"
+        },
+        "test": {
+            "query_string": "ml_train:test"
+        },
+        "train": {
+            "query_string": "ml_train:train"
+        }
+    },
+    "pipeline": [
+        {
+            "fields": [
+                "body",
+                "keywords.category",
+                "keywords.ml_version"
+            ],
+            "step": "loader",
+            "type": "squirro_query"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "filter",
+            "type": "empty"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "html"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "character"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "punctuation"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "lowercase"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "stopwords": [
+                "a",
+                "about",
+                "above",
+                "after",
+                "again",
+                "against",
+                "all",
+                "am",
+                "an",
+                "and",
+                "any",
+                "are",
+                "as",
+                "at",
+                "b",
+                "be",
+                "because",
+                "been",
+                "before",
+                "being",
+                "below",
+                "between",
+                "both",
+                "but",
+                "by",
+                "c",
+                "could",
+                "did",
+                "do",
+                "does",
+                "doing",
+                "down",
+                "during",
+                "each",
+                "few",
+                "for",
+                "from",
+                "further",
+                "gt",
+                "had",
+                "has",
+                "have",
+                "having",
+                "he",
+                "hed",
+                "hell",
+                "hes",
+                "her",
+                "here",
+                "heres",
+                "hers",
+                "herself",
+                "him",
+                "himself",
+                "his",
+                "how",
+                "hows",
+                "i",
+                "id",
+                "ill",
+                "im",
+                "ive",
+                "if",
+                "in",
+                "into",
+                "is",
+                "it",
+                "its",
+                "its",
+                "itself",
+                "lets",
+                "me",
+                "more",
+                "most",
+                "my",
+                "myself",
+                "nor",
+                "not",
+                "o",
+                "of",
+                "on",
+                "once",
+                "only",
+                "or",
+                "other",
+                "ought",
+                "our",
+                "ours",
+                "ourselves",
+                "out",
+                "over",
+                "own",
+                "q",
+                "re",
+                "s",
+                "same",
+                "she",
+                "shed",
+                "shell",
+                "shes",
+                "should",
+                "so",
+                "some",
+                "such",
+                "than",
+                "that",
+                "thats",
+                "the",
+                "their",
+                "theirs",
+                "them",
+                "themselves",
+                "then",
+                "there",
+                "theres",
+                "these",
+                "they",
+                "theyd",
+                "theyll",
+                "theyre",
+                "theyve",
+                "this",
+                "those",
+                "through",
+                "to",
+                "too",
+                "under",
+                "until",
+                "up",
+                "v",
+                "very",
+                "was",
+                "we",
+                "wed",
+                "well",
+                "were",
+                "weve",
+                "were",
+                "what",
+                "whats",
+                "when",
+                "whens",
+                "where",
+                "wheres",
+                "which",
+                "while",
+                "who",
+                "whos",
+                "whom",
+                "why",
+                "whys",
+                "with",
+                "would",
+                "x",
+                "you",
+                "youd",
+                "youll",
+                "youre",
+                "youve",
+                "your",
+                "yours",
+                "yourself",
+                "yourselves"
+            ],
+            "type": "stopwords"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "tokenizer",
+            "type": "spaces"
+        },
+        {
+            "input_field": "body",
+            "output_field": "embedded_text",
+            "step": "embedder",
+            "type": "tfidf"
+        },
+        {
+            "input_field": "embedded_text",
+            "model_type": "svd",
+            "n_components": 100,
+            "output_field": "embedded_text",
+            "step": "projector",
+            "type": "sklearn"
+        },
+        {
+            "explanation_field": "keywords.sig_terms_kmean",
+            "input_field": "embedded_text",
+            "n_clusters": 5,
+            "output_field": "keywords.topics_kmeans",
+            "step": "clusterer",
+            "term_field": "body",
+            "type": "kmeans"
+        },
+        {
+            "fields": [
+                "keywords.topics_kmeans",
+                "keywords.sig_terms_kmean"
+            ],
+            "step": "saver",
+            "tracking_facet_name": "ml_version",
+            "tracking_facet_value": "ml_kmean_v1",
+            "type": "squirro_item"
+        }
+    ]
+}

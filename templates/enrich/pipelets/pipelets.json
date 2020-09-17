@@ -1,0 +1,16 @@
+{
+    "MyPipelet": {
+        "file_location": "pipelets/my_pipelet.py",
+        "stage": "before templating",
+        "config": {
+                "string1": "value1",
+                "int1": 1,
+                "list1": ["value1", "value2"],
+                "boolean1": true,
+                "dict1": {
+                    "string2": "value2"
+                }
+            }
+        }
+    }
+}

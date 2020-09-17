@@ -1,0 +1,7 @@
+{
+    "MultipleItemsPipelet": {
+        "file_location": "pipelet.py",
+        "stage": "after templating",
+        "config": {},
+    }
+}

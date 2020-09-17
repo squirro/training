@@ -1,0 +1,10 @@
+{
+    // See https://squirro.atlassian.net/wiki/display/DOC/Config+Reference
+    "TemplatePipelet": {
+        "file_location": "pipelet.py",
+        "stage": "before templating",
+        "config": {
+            "attribute": "value"
+        }
+    }
+}

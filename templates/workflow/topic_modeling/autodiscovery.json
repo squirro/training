@@ -1,0 +1,47 @@
+{
+  "dataset": {
+    "train": {"query_string": "*"},
+    "test": {"query_string": "type:test"},
+    "process": {"query_string": "*"}
+  },
+  "analyzer": {
+    "type": "topic_modeling",
+    "label_field": "label",
+    "tag_field": "topics"
+  },
+  "pipeline": [
+    {
+      "step": "loader",
+      "type": "squirro_query",
+      "fields": ["body", "keywords.label"]
+    },{
+      "step": "normalizers",
+      "types": [
+        "html",
+        "punctuation",
+        "lowercase",
+        "character"
+      ],
+      "fields": ["body"]
+    },{
+      "step": "tokenizer",
+      "type": "spaces",
+      "fields": ["body"]
+    },{
+      "step": "embedder",
+      "type": "doc2vec",
+      "batch_size": 256,
+      "input_field": "body",
+      "output_field": "embedded_body"
+    },{
+      "step": "clusterer",
+      "type": "gmm",
+      "n_clusters": 3,
+      "batch_size": 256,
+      "input_field": "embedded_body",
+      "label_field": "topics",
+      "explanation_field": "associated_terms",
+      "term_field": "body"
+    }
+  ]
+}
