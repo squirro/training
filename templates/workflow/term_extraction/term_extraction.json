@@ -1,0 +1,47 @@
+{
+  "dataset": {
+    "train": "../classification_20_newsgroups/data/train",
+    "test": "../classification_20_newsgroups/data/test"
+  },
+  "pipeline": [
+    {
+      "step": "loader",
+      "type": "file",
+      "encoding": "latin1",
+      "output_field": "body",
+      "directory_field": "label"
+    },
+    {
+      "step": "embedder",
+      "input_field": [
+        "body"
+      ],
+      "type": "terms_extraction",
+      "filter_list": [
+        "team"
+      ],
+      "min_word_len": 4,
+      "max_chunk_len": 2,
+      "p_significant_terms": 0.2,
+      "add_lemmization": false,
+      "cache_lemmas": true,
+      "save_model": true,
+      "output_field": "terms"
+    },
+    {
+      "fields": [
+        "terms"
+      ],
+      "type": "log_fields",
+      "step": "debugger"
+    },
+    {
+      "fields": [
+        "terms"
+      ],
+      "step": "saver",
+      "type": "json",
+      "output_file": "terms.json"
+    }
+  ]
+}

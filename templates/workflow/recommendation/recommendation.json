@@ -1,0 +1,41 @@
+{
+  "dataset": {
+    "train": {"query_string": "entity:{type:interest}"},
+    "test": {"query_string": "entity:{type:interest}"},
+    "process": {"query_string": "entity:{type:interest}"}
+  },
+  "pipeline": [
+    {
+      "step": "loader",
+      "type": "squirro_query",
+      "fields": [
+        "entities.properties.input_1",
+        "entities.properties.input_2",
+        "entities.properties.input_3",
+        "entities.properties.label"
+      ],
+      "split_out_entities": true
+    },{
+      "step": "checkpoint",
+      "type": "disk",
+      "batch_size": 64
+    },{
+      "step": "classifier",
+      "type": "sklearn",
+      "model_type": "SVC",
+      "model_kwargs": {"probability": true},
+      "input_fields": [
+        "entities.properties.input_1",
+        "entities.properties.input_2",
+        "entities.properties.input_3"
+      ],
+      "label_field": "entities.properties.label",
+      "output_field": "entities.properties.prediction",
+      "explanation_field": "entities.properties.rec_explanation"
+    },{
+      "step": "saver",
+      "type": "squirro_item",
+      "fields": ["entities.properties.prediction"]
+    }
+  ]
+}

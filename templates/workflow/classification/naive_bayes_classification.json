@@ -1,0 +1,103 @@
+{
+    "dataset": {
+        "infer": {
+            "count": 10000,
+            "query_string": "(NOT ml_version:ml_v1) AND (NOT ml_train:train)"
+        },
+        "test": {
+            "query_string": "category:* AND NOT ml_train:train"
+        },
+        "train": {
+            "query_string": "category:* AND ml_train:train"
+        }
+    },
+    "pipeline": [
+        {
+            "fields": [
+                "body",
+                "keywords.category",
+                "keywords.ml_version"
+            ],
+            "step": "loader",
+            "type": "squirro_query"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "filter",
+            "type": "empty"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "html"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "character"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "punctuation"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "normalizer",
+            "type": "lowercase"
+        },
+        {
+            "fields": [
+                "body"
+            ],
+            "step": "tokenizer",
+            "type": "spaces"
+        },
+        {
+            "input_field": "body",
+            "output_field": "embedded_body",
+            "step": "embedder",
+            "type": "tfidf"
+        },
+        {
+            "explanation_field": "keywords.ml_explanation",
+            "input_field": "embedded_body",
+            "label_field": "keywords.category",
+            "model_kwargs": {},
+            "model_type": "BernoulliNB",
+            "output_field": "keywords.ml_nb_result",
+            "step": "classifier",
+            "type": "sklearn",
+            "use_sparse": true
+        },
+        {
+            "fields": [
+                "keywords.ml_nb_result"
+            ],
+            "flatten": true,
+            "skip": false,
+            "step": "filter",
+            "threshold": 0.5,
+            "type": "threshold"
+        },
+        {
+            "fields": [
+                "keywords.ml_nb_result"
+            ],
+            "step": "saver",
+            "tracking_facet_name": "ml_version",
+            "tracking_facet_value": "ml_v1",
+            "type": "squirro_item"
+        }
+    ]
+}

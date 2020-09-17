@@ -1,0 +1,115 @@
+{
+    "dataset": {
+        "infer": {
+            "count": 10000,
+            "query_string": "NOT ml_version:ml_v1"
+        },
+        "test": {
+            "query_string": "ml_classifier:label"
+        },
+        "train": {
+            "query_string": "ml_classifier:label"
+        }
+    },
+    "pipeline": [
+        {
+            "fields": [
+                "body",
+                "title",
+                "keywords.ml_classifier",
+                "keywords.ml_version"
+            ],
+            "step": "loader",
+            "type": "squirro_query"
+        },
+        {
+            "input_fields": [
+                "title",
+                "body"
+            ],
+            "output_field": "text",
+            "step": "filter",
+            "type": "merge"
+        },
+        {
+            "fields": [
+                "text"
+            ],
+            "replacement_value": "n/a",
+            "skip": false,
+            "step": "filter",
+            "type": "empty"
+        },
+        {
+            "fields": [
+                "text"
+            ],
+            "step": "normalizer",
+            "type": "html"
+        },
+        {
+            "fields": [
+                "text"
+            ],
+            "step": "normalizer",
+            "type": "lowercase"
+        },
+        {
+            "fields": ["text"],
+            "step": "normalizer",
+            "type": "stopwords",
+            "stopwords": ["list", "of", "stopwords"]
+        },
+        {
+            "fields": [
+                "text"
+            ],
+            "step": "normalizer",
+            "type": "character"
+        },
+        {
+            "fields": [
+                "text"
+            ],
+            "step": "normalizer",
+            "type": "punctuation"
+        },
+        {
+            "explanation_field": "keywords.ml_explanation",
+            "input_field": "text",
+            "label_field": "keywords.ml_classifier",
+            "output_field": "keywords.ml_classifier_result",
+            "step": "classifier",
+            "n_epochs": 50,
+            "min_count": 1000,
+            "type": "fasttext"
+        },
+        {
+            "step": "log",
+            "fields": [
+                "keywords.ml_classifier_result",
+                "text"
+            ],
+            "type": "warn"
+        },
+        {
+            "fields": [
+                "keywords.ml_classifier_result"
+            ],
+            "flatten": true,
+            "skip": false,
+            "step": "filter",
+            "threshold": 0.5,
+            "type": "threshold"
+        },
+        {
+            "fields": [
+                "keywords.ml_classifier_result"
+            ],
+            "step": "saver",
+            "tracking_facet_name": "ml_version",
+            "tracking_facet_value": "ml_v1",
+            "type": "squirro_item"
+        }
+    ]
+}
