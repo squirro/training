@@ -133,7 +133,7 @@ class RSSJSONSource(DataSource):
         """
         # Generate a stable id that changes with the main parameters
         m = hashlib.sha256()
-        m.update(self.args.manifest_file)
+        m.update(self.args.manifest_file.encode('utf-8'))
         job_id = m.hexdigest()
         log.debug("Job ID: %s", job_id)
         return job_id
