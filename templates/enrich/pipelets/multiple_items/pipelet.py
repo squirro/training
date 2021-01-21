@@ -26,13 +26,8 @@ class MultipleItemsPipelet(PipeletV1):
 
         # Create a new id for the copied item.
         m = hashlib.sha256()
-<<<<<<< HEAD
         m.update(item.get('id', '').encode('utf-8'))
         m.update('new_item').encode('utf-8'))
-=======
-        m.update(unicode(item.get('id', '')))
-        m.update(unicode('new_item'))
->>>>>>> 93ca12bb5479129a41bbb70e877c4ed3e5403c67
         new_id = m.hexdigest()
 
         # This can be expensive, as deepcopy is slow.

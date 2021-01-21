@@ -77,13 +77,8 @@ class TemplateSource(DataSource):
         """
         # Generate a stable id that changes with the main parameters
         m = hashlib.sha256()
-<<<<<<< HEAD
         m.update(self.args.first_custom_param.encode('utf-8'))
         m.update(self.args.second_custom_param.encode('utf-8'))
-=======
-        m.update(unicode(self.args.first_custom_param))
-        m.update(unicode(self.args.second_custom_param))
->>>>>>> 93ca12bb5479129a41bbb70e877c4ed3e5403c67
         job_id = m.hexdigest()
         log.debug("Job ID: %s", job_id)
         return job_id
