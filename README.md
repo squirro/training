@@ -8,7 +8,7 @@ Included here are a set of examples and training resources meant to accompany th
 To use the examples here, you will need to install the Squirro toolbox. The Squirro toolbox is available to all Squirro Partners and Developers [Here](https://squirro.atlassian.net/wiki/display/DOC/Toolbox). If you would like access to the Squirro Data Loader, please contact support@squirro.com.
 
 ### Python
-To use the Squirro Toolbox, you must have Python 2 installed. Please note that the Squirro toolbox does not support Python 3 (yet).
+To use the Squirro Toolbox, you must have Python 3 installed.
 
 It is recommended to install python via [Homebrew](https://brew.sh/)
 ```bash
