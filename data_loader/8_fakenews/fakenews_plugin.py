@@ -1,7 +1,4 @@
 """Load data from the Squirro Fake News Training API"""
-__plugin_name__ = "fakenews_plugin"
-__version__ = "1.0"
-
 
 import logging
 import hashlib
@@ -13,7 +10,7 @@ from squirro.dataloader.data_source import DataSource
 log = logging.getLogger(__name__)
 
 
-class __FakeNewsDataSource(DataSource):
+class FakeNewsDataSource(DataSource):
     """FakeNews Plugin for the sq_data_loader.
 
     Features:
@@ -38,7 +35,7 @@ class __FakeNewsDataSource(DataSource):
         # close the https sesssion
         self.requests.close()
 
-    def getDataBatch(self, batch_size=100, preview=False):
+    def getDataBatch(self, batch_size=100):
 
         items = []
 
