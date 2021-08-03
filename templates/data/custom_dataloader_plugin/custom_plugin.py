@@ -78,11 +78,12 @@ class TemplateSource(DataSource):
         :returns a string
         """
         # Generate a stable id that changes with the main parameters
-        m = hashlib.sha256()
-        m.update(self.args.first_custom_param.encode("utf-8"))
-        m.update(self.args.second_custom_param.encode("utf-8"))
+        m = hashlib.blake2b(digest_size=20)
+        for v in (self.args.first_custom_param, self.args.second_custom_param):
+            m.update(repr(v).encode())
+
         job_id = m.hexdigest()
-        log.debug("Job ID: %s", job_id)
+        log.info("Job ID: %s", job_id)
         return job_id
 
     def getArguments(self):
