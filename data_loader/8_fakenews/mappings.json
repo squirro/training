@@ -1,0 +1,8 @@
+{
+    "map_id": "id",
+    "map_title": "headline",
+    "map_body": "body",
+    "map_created_at": "date",
+    "map_url": "article_uri",
+    "facets_file": "facets.json"
+}
