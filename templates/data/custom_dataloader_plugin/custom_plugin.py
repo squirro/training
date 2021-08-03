@@ -18,8 +18,8 @@ class TemplateSource(DataSource):
         pass
 
     def connect(self, inc_column=None, max_inc_value=None):
-        log.debug('Incremental Column: %r', inc_column)
-        log.debug('Incremental Last Value: %r', max_inc_value)
+        log.debug("Incremental Column: %r", inc_column)
+        log.debug("Incremental Last Value: %r", max_inc_value)
 
     def disconnect(self):
         """Disconnect from the source."""
@@ -59,13 +59,15 @@ class TemplateSource(DataSource):
         """
 
         schema = [
-            'title',
-            'body',
-            'created_at',
-            'id',
-            'summary',
-            'abstract',
-            'keywords'
+            "title",
+            "body",
+            "link",
+            "created_at",
+            "id",
+            "summary",
+            "abstract",
+            "type",
+            "section",
         ]
 
         return schema
@@ -77,8 +79,8 @@ class TemplateSource(DataSource):
         """
         # Generate a stable id that changes with the main parameters
         m = hashlib.sha256()
-        m.update(self.args.first_custom_param.encode('utf-8'))
-        m.update(self.args.second_custom_param.encode('utf-8'))
+        m.update(self.args.first_custom_param.encode("utf-8"))
+        m.update(self.args.second_custom_param.encode("utf-8"))
         job_id = m.hexdigest()
         log.debug("Job ID: %s", job_id)
         return job_id
@@ -93,12 +95,12 @@ class TemplateSource(DataSource):
                 "name": "first_custom_param",
                 "help": "Custom Dataloader Plugin argument 1",
                 "required": True,
-                "default": "abc"
+                "default": "abc",
             },
             {
                 "name": "second_custom_param",
                 "help": "Custom Dataloader Plugin argument 2",
                 "required": True,
-                "default": "abc"
+                "default": "abc",
             },
         ]

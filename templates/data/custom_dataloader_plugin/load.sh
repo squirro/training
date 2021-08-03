@@ -8,7 +8,7 @@ squirro_data_load -v \
     --cluster $CLUSTER \
     --project-id $PROJECT_ID \
     --log-file 'Data_Loading.log' \
-    --source-script 'plugin.py' \
+    --source-script 'custom_plugin.py' \
     --first-custom-param $CUSTOM_PARAM_1 \
     --second-custom-param $CUSTOM_PARAM_2 \
     --source-name 'Data' \
