@@ -35,8 +35,8 @@ class TemplateSource(DataSource):
 
         rows = []
 
-        # This call should ideally `yield` and not return all items directly
-        content = get_content_from_somewhere()
+        # This call should `yield` and not return all items directly
+        content = get_content_from_somewhere()  # noqa
 
         for row in content:
             # Emit a `row` here that's flat dictionary. If that's not the case
