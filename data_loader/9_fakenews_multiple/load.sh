@@ -10,7 +10,7 @@ squirro_data_load -v \
     --cluster $CLUSTER \
     --token $TOKEN \
     --project-id $PROJECT_ID \
-    --source-script 'fakenews_plugin.py' \
+    --source-script 'fakenewsmultiple_plugin.py' \
     --source-name "Fake News" \
     --source-batch-size 100 \
     --batch-size 100 \

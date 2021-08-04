@@ -1,7 +1,7 @@
 {
     "title": "Fake News Training API Multisection",
     "description": "Index some random fake data",
-    "plugin_file": "fakenews_plugin.py",
+    "plugin_file": "fakenewsmultiple_plugin.py",
     "category": "web",
     "thumbnail_file": "icon.png",
     "scheduling_options_file": "scheduling_options.json",
