@@ -1,6 +1,5 @@
 """Load data from the Squirro Fake News Training API"""
 
-
 import hashlib
 import json
 import logging

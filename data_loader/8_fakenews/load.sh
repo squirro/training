@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+cd "$(dirname "$0")"
 
 CLUSTER="https://..."
 TOKEN="..."
