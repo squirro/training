@@ -1,10 +1,12 @@
 """Load data from the Squirro Fake News Training API"""
 
-import logging
+
 import hashlib
 import json
-import requests
+import logging
 import urllib.parse
+
+import requests
 from squirro.dataloader.data_source import DataSource
 
 log = logging.getLogger(__name__)
