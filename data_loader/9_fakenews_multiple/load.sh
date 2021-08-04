@@ -15,7 +15,7 @@ squirro_data_load -v \
     --source-batch-size 100 \
     --batch-size 100 \
     --endpoint "https://fakenews.squirro.com" \
-    --section "sport" \
+    --section "sport" "finance" \
     --map-title 'headline' \
     --map-body 'body' \
     --map-id 'id' \
