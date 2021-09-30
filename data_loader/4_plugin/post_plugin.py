@@ -1,6 +1,7 @@
 """
 Dataloader Plugin Example - Fake post data
 """
+
 import hashlib
 import logging
 import requests
@@ -56,11 +57,7 @@ class ExampleSource(DataSource):
         number_of_posts = self.args.number_of_posts
 
         for post_number in range(1, number_of_posts + 1):
-
-            post_url = 'http://jsonplaceholder.typicode.com/'\
-                      'posts/{number}'.format(
-                            number=post_number)
-
+            post_url = 'http://jsonplaceholder.typicode.com/posts/{number}'.format(number=post_number)
             response = requests.get(post_url)
             post_content = response.json()
 
@@ -89,7 +86,7 @@ class ExampleSource(DataSource):
         """
         # Generate a stable id that changes with the main parameters
         m = hashlib.sha256()
-        m.update(unicode(self.args.number_of_posts))
+        m.update(str(self.args.number_of_posts).encode('utf-8'))
         job_id = m.hexdigest()
         log.debug("Job ID: %s", job_id)
         return job_id
