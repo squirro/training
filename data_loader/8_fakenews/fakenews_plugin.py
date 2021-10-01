@@ -5,6 +5,7 @@ import logging
 import urllib.parse
 
 import requests
+
 from squirro.dataloader.data_source import DataSource
 
 log = logging.getLogger(__name__)
