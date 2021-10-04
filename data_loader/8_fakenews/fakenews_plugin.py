@@ -2,7 +2,6 @@
 
 import hashlib
 import logging
-import urllib.parse
 
 import requests
 
@@ -135,10 +134,9 @@ class FakeNewsDataSource(DataSource):
 
         base_url = f"{self.args.endpoint}/news/{section}"
         request_params = {"count": count, "since": since}
-        url = base_url + "?" + urllib.parse.urlencode(request_params)
 
         # call the api
-        response = self.requests.get(url, headers={"Content-Type": "application/json"})
+        response = self.requests.get(base_url, params=request_params)
 
         # throw an exception if the http status is not ok
         response.raise_for_status()

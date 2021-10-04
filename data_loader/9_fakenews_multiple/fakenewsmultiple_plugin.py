@@ -144,15 +144,14 @@ class FakeNewsMultipleDataSource(DataSource):
 
         base_url = f"{self.args.endpoint}/news/{section}"
         request_params = {"count": count, "since": since}
-        url = base_url + "?" + urllib.parse.urlencode(request_params)
 
-        cache_hit = self.key_value_cache.get(url)
-
+        cache_key = (base_url, request_params)
+        cache_hit = self.key_value_cache.get(cache_key)
         if cache_hit:
             return json.loads(cache_hit)
 
         # call the api
-        response = self.requests.get(url, headers={"Content-Type": "application/json"})
+        response = self.requests.get(base_url, params=request_params)
 
         # throw an exception if the http status is not ok
         response.raise_for_status()
@@ -164,6 +163,6 @@ class FakeNewsMultipleDataSource(DataSource):
 
         # we only store into cache if this is not the last page
         if not data_batch["eof"]:
-            self.key_value_cache[url] = response.text
+            self.key_value_cache[cache_key] = response.text
 
         return data_batch
