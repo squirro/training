@@ -1,0 +1,9 @@
+{
+    "title": "Fake News Training API",
+    "description": "Index some random fake data",
+    "plugin_file": "fakenews_plugin.py",
+    "category": "web",
+    "thumbnail_file": "icon.png",
+    "scheduling_options_file": "scheduling_options.json",
+    "dataloader_options_file": "mappings.json"
+}

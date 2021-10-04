@@ -1,0 +1,21 @@
+{
+    "author": {
+        "name": "news_author",
+        "display_name": "News Author",
+        "default_value": "Unkown Author",
+        "data_type": "string",
+        "visible": true,
+        "searchable": true,
+        "typeahead": true,
+        "analyzed": true
+    },
+    "section": {
+        "name": "section",
+        "display_name": "Section",
+        "data_type": "string",
+        "visible": true,
+        "searchable": false,
+        "typeahead": false,
+        "analyzed": false
+    }
+}

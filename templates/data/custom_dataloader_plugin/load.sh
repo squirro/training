@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
-cd $(dirname $0)
 set -e
+cd "$(dirname "$0")"
 source ../../common/config/config.sh
 
 squirro_data_load -v \
     --token $TOKEN \
     --cluster $CLUSTER \
     --project-id $PROJECT_ID \
-    --log-file 'Data_Loading.log' \
-    --source-script 'plugin.py' \
-    --first-custom-param $CUSTOM_PARAM_1 \
-    --second-custom-param $CUSTOM_PARAM_2 \
+    --source-script 'custom_plugin.py' \
+    --first-custom-param "$(getval first_param squirro)" \
+    --second-custom-param "$(getval second_param squirro)" \
     --source-name 'Data' \
     --map-title 'title' \
     --map-abstract 'abstract' \
@@ -19,5 +18,10 @@ squirro_data_load -v \
     --map-id 'id' \
     --map-url 'link' \
     --map-created-at 'created_at' \
-    --facets-file 'facets.json' \
-    --pipelets-file 'pipelets.json'
+    --facets-file 'facets.json'
+
+    # Optional for pipelets
+    #--pipelets-file 'pipelets.json'
+
+    # Optional logging output to a file
+    #--log-file 'data_loading.log'
